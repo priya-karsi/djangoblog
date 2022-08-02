@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width={device-width}, initial-scale=1.0">
+    <title>Products_page</title>
+</head>
+<body>
+    <!-- {{keyproducts}} -->
+    <div class="row">
+        <div class="col-md-10">
+            <table>
+                <tr>
+                    <th>Name</th>
+                    <th>Summary</th>
+                    <th>Color</th>
+                    <th>Size</th>
+                    <th>Price</th>
+                    <th>Buy</th>
+                    <th>Category</th>
+                </tr>
+                {% for product in keyproducts %}
+                <tr>
+                    <td>{{product.name}}</td>
+                    <td>{{product.summary}}</td>
+                    <td>{{product.color}}</td>
+                    <td>{{product.size}}</td>
+                    <td>{{product.price}}</td>
+                    <td>{{product.buy}}</td>
+                    <td>{{product.cname}}</td>
+                </tr>
+                {% endfor %}
+            </table>
+        </div>
+    </div>
+</body>
+</html>

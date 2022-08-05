@@ -4,6 +4,8 @@ from django.db import connection
 
 # Create your views here.
 def home(request):
+    return render(request,'list/home.html')
+def show(request):
     cursor=connection.cursor()
     cursor.execute('SELECT name,summary,color,size,price,buy,cname FROM products_table NATURAL JOIN category where cId=1;')
 
@@ -19,4 +21,4 @@ def home(request):
     }
 
     # return HttpResponse('<h1>Welcome to home</h1>')
-    return render(request,'list/home.html',context)
+    return render(request,'list/view_products.html',context)

@@ -1,8 +1,7 @@
 from django.shortcuts import render,redirect
 from django.http import HttpResponse
 from django.db import connection
-from pymysql import *
-from pymysql import cursors
+
 
 # Create your views here.
 # def home(request):
@@ -41,4 +40,37 @@ def insert(request):
     cursor.execute("INSERT INTO posts (`title`,`content`) VALUES ( %s, %s );", (title, content))
     cursor = connection.cursor()
     cursor.execute("SELECT * from posts where softdelete = 0")
+    return redirect('/blog/home')
+
+def edit(request,pk):
+    cursor=connection.cursor()
+    cursor.execute(f"select * from posts where softdelete=0 and id={pk}")
+    # result=cursor.fetchone()
+
+    columns = [col[0] for col in cursor.description]
+    posts =  [
+        dict(zip(columns, row))
+        for row in cursor.fetchall()
+    ]
+    context={
+        'keyposts':posts[0], #post[0] because we need only the dictionary and not list of dictionary
+    }
+
+    # print(result)
+    # print(pk)
+    print(context)
+    return render(request,'blogapp/editForm.html',context)
+
+def update(request):
+    id=request.POST['id']
+    title=request.POST['blogTitle']
+    content=request.POST['content']
+    cursor=connection.cursor()
+    cursor.execute('update posts set title=%s,content=%s where id=%s',(title,content,id))
+    return redirect('/blog/home')
+
+
+def delete(request,pk):
+    cursor=connection.cursor()
+    cursor.execute(f'update posts set softdelete=1 where id={pk}')
     return redirect('/blog/home')

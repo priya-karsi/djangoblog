@@ -2,6 +2,7 @@ from django.shortcuts import render,redirect
 from django.http import HttpResponse
 from django.db import connection
 from .models import Blog
+from django.contrib.auth.decorators import login_required
 
 from blogapp.models import Blog
 from django.db.models import Q
@@ -28,6 +29,10 @@ def home(request):
 
 def create(request):
     return render(request,'blogapp/form.html')
+
+@login_required
+def profile(request):
+    return render(request,'blogapp/profile.html')
 
 def insert(request):
     title = request.POST['blogTitle']

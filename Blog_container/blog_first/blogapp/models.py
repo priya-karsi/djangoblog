@@ -1,3 +1,4 @@
+from email.policy import default
 from django.db import models
 from django.contrib.auth.models import User
 # Create your models here.
@@ -7,5 +8,6 @@ class Blog(models.Model):
     publishedAt = models.DateTimeField(auto_now_add = True)
     modifiedAt = models.DateTimeField(auto_now=True)
     activeYN = models.IntegerField(default=1)
+    file = models.ImageField(upload_to='uploads/',null=True)
     userID = models.ForeignKey(User, on_delete=models.CASCADE, default=1)
 

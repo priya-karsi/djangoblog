@@ -42,7 +42,7 @@
     
     <div class="row justify-content-center my-3">
         <div class="col-10">
-            <form action="{% url 'add' %}" method="POST">
+            <form action="{% url 'add' %}" method="POST" enctype="multipart/form-data">
                 {% csrf_token %}
                 <fieldset>
                     <legend>
@@ -55,6 +55,10 @@
                       <div class="mb-3">
                         <label for="blogContent" class="form-label">Content</label>
                         <textarea name="content" id="content" cols="30" rows="10" class="form-control"></textarea>
+                      </div>
+                      <div class="mb-3">
+                        <label for="img" class="form-label">Upload</label>
+                        <input type="file" name="imageFile" id="img">
                       </div>
                       <button type="submit" class="btn btn-primary">Submit</button>
                 </fieldset>

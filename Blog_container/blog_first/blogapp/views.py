@@ -37,7 +37,8 @@ def profile(request):
 def insert(request):
     title = request.POST['blogTitle']
     content = request.POST['content']
-    blog = Blog(title=title, content=content)
+    files= request.FILES['imageFile']
+    blog = Blog(title=title, content=content, file=files)
     blog.save()
     return redirect('/blog/home')
 
